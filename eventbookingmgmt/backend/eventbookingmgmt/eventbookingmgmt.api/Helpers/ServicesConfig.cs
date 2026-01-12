@@ -24,7 +24,9 @@ namespace eventbookingmgmt.api.Helpers
             services.AddScoped(typeof(ImststateService), typeof(mststateService));
             services.AddScoped(typeof(ImstcountryRepository), typeof(mstcountryRepository));
             services.AddScoped(typeof(ImstcountryService), typeof(mstcountryService));
-           
+            services.AddScoped(typeof(ImstlocationRepository), typeof(mstlocationRepository));
+            services.AddScoped(typeof(ImstlocationService), typeof(mstlocationService));
+
         }
 
         public static void AddMydbcontextContext(this IServiceCollection services)
