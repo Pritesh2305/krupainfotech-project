@@ -2,8 +2,8 @@
 using eventbookingmgmt.api.Middleware;
 using eventbookingmgmt.entities.Common;
 using eventbookingmgmt.entities.RequestDto;
-using eventbookingmgmt.services.Implementation;
 using eventbookingmgmt.services.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -11,28 +11,27 @@ namespace eventbookingmgmt.api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class mstlocationController : ControllerBase
+    public class mstguestController : ControllerBase
     {
-
         private readonly AppSettings _appSettings;
-        private readonly ImstlocationService _imstlocationsservice;
+        private readonly ImstguestService _imstguestsservice;
         private readonly IUserClientCodeService _UserClientCodeService;
-        public mstlocationController(ImstlocationService imstlocationsservice, IUserClientCodeService userClientCodeService, IOptions<AppSettings> appSettings)
+        public mstguestController(ImstguestService imstguestsservice, IUserClientCodeService userClientCodeService, IOptions<AppSettings> appSettings)
         {
-            _imstlocationsservice = imstlocationsservice;
+            _imstguestsservice = imstguestsservice;
             _appSettings = appSettings.Value;
             _UserClientCodeService = userClientCodeService;
         }
-        
+
         [HttpPost]
         [ActionName("Insert")]
-        public IActionResult Insert([FromBody] mstlocationRequest viewModel)
+        public IActionResult Insert([FromBody] mstguestRequest viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = _imstlocationsservice.Insert(viewModel);
+            var res = _imstguestsservice.Insert(viewModel);
             if (res.ISuccess)
             {
                 return Ok(res);
@@ -45,13 +44,13 @@ namespace eventbookingmgmt.api.Controllers
 
         [HttpPost]
         [ActionName("Update")]
-        public IActionResult Update([FromBody] mstlocationRequest viewModel)
+        public IActionResult Update([FromBody] mstguestRequest viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = _imstlocationsservice.Update(viewModel);
+            var res = _imstguestsservice.Update(viewModel);
             if (res.ISuccess)
             {
                 return Ok(res);
@@ -70,7 +69,7 @@ namespace eventbookingmgmt.api.Controllers
             {
                 return BadRequest(ModelState.Values.ToArray());
             }
-            var res = _imstlocationsservice.Delete(viewModel);
+            var res = _imstguestsservice.Delete(viewModel);
             if (res.ISuccess)
             {
                 return Ok(res);
@@ -97,7 +96,7 @@ namespace eventbookingmgmt.api.Controllers
             //var lastname = CommonFunction.DecryptString(CommonFunction.GENSECERTKEY, tokenS.Claims.First(claim => claim.Type == "lastname").Value);
             //var utyperid = CommonFunction.DecryptString(CommonFunction.GENSECERTKEY, tokenS.Claims.First(claim => claim.Type == "utyperid").Value);
 
-            var res = _imstlocationsservice.GetAllDetails();
+            var res = _imstguestsservice.GetAllDetails();
             if (res.ISuccess)
             {
                 return Ok(res);
@@ -124,7 +123,7 @@ namespace eventbookingmgmt.api.Controllers
             //var lastname = CommonFunction.DecryptString(CommonFunction.GENSECERTKEY, tokenS.Claims.First(claim => claim.Type == "lastname").Value);
             //var utyperid = CommonFunction.DecryptString(CommonFunction.GENSECERTKEY, tokenS.Claims.First(claim => claim.Type == "utyperid").Value);
 
-            var res = _imstlocationsservice.GetList();
+            var res = _imstguestsservice.GetList();
             if (res.ISuccess)
             {
                 return Ok(res);
@@ -139,7 +138,7 @@ namespace eventbookingmgmt.api.Controllers
         [ActionName("GetById")]
         public IActionResult GetById(Int64 Id)
         {
-            var res = _imstlocationsservice.GetById(Id);
+            var res = _imstguestsservice.GetById(Id);
             if (res.ISuccess)
             {
                 return Ok(res);
@@ -149,6 +148,5 @@ namespace eventbookingmgmt.api.Controllers
                 return NotFound(res);
             }
         }
-
     }
 }

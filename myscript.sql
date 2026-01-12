@@ -803,15 +803,15 @@ set @p_retval=1
 
 SELECT * INTO #temptbl FROM OPENJSON(@p_json)
 WITH
-(rid bigint '$.rid',loccode nvarchar(50) '$.loccode',locname nvarchar(500) '$.locname',
-locremark1 nvarchar(max) '$.locremark1',locremark2 nvarchar(max) '$.locremark2',
+(rid bigint '$.rid',locationcode nvarchar(50) '$.locationcode',locationname nvarchar(500) '$.locationname',
+locationremark1 nvarchar(max) '$.locationremark1',locationremark2 nvarchar(max) '$.locationremark2',
 urid bigint '$.urid'
 )
 set @rid = (select rid from #temptbl)
-set @loccode = (select loccode from #temptbl)
-set @locname = (select locname from #temptbl)
-set @locremark1 = (select locremark1 from #temptbl)
-set @locremark2 = (select locremark2 from #temptbl)
+set @loccode = (select locationcode from #temptbl)
+set @locname = (select locationname from #temptbl)
+set @locremark1 = (select locationremark1 from #temptbl)
+set @locremark2 = (select locationremark2 from #temptbl)
 set @urid = (select urid from #temptbl)
 
 IF EXISTS (SELECT mstlocation.loccode FROM mstlocation WHERE mstlocation.loccode = @loccode and isnull(mstlocation.delflg,0)=0)
@@ -872,15 +872,15 @@ set @p_retval=1
 
 SELECT * INTO #temptbl FROM OPENJSON(@p_json)
 WITH
-(rid bigint '$.rid',loccode nvarchar(50) '$.loccode',locname nvarchar(500) '$.locname',
-locremark1 nvarchar(max) '$.locremark1',locremark2 nvarchar(max) '$.locremark2',
+(rid bigint '$.rid',locationcode nvarchar(50) '$.locationcode',locationname nvarchar(500) '$.locationname',
+locationremark1 nvarchar(max) '$.locationremark1',locationremark2 nvarchar(max) '$.locationremark2',
 urid bigint '$.urid'
 )
 set @rid = (select rid from #temptbl)
-set @loccode = (select loccode from #temptbl)
-set @locname = (select locname from #temptbl)
-set @locremark1 = (select locremark1 from #temptbl)
-set @locremark2 = (select locremark2 from #temptbl)
+set @loccode = (select locationcode from #temptbl)
+set @locname = (select locationname from #temptbl)
+set @locremark1 = (select locationremark1 from #temptbl)
+set @locremark2 = (select locationremark2 from #temptbl)
 set @urid = (select urid from #temptbl)
 
 IF NOT EXISTS (SELECT mstloc.rid FROM mstloc WHERE mstloc.rid = @rid and isnull(mstloc.delflg,0)=0)
@@ -992,3 +992,289 @@ mstlocation.arid,mstlocation.adatetime,mstlocation.erid,mstlocation.edatetime,ms
 from mstlocation where mstlocation.rid=@p_rid and isnull(mstlocation.delflg,0)=0
 end
 GO
+create table mstguest
+(
+rid bigint identity(1,1) primary key,
+gcode nvarchar(50),
+gname nvarchar(500),
+gmobno nvarchar(500),
+gwano nvarchar(500),
+gemail nvarchar(500),
+gadd1 nvarchar(500),
+gadd2 nvarchar(500),
+gadd3 nvarchar(500),
+gcityrid bigint,
+gstaterid bigint,
+gcountryrid bigint,
+gremark1 nvarchar(max),
+gremark2 nvarchar(max),
+arid bigint,
+adatetime datetime,
+erid bigint,
+edatetime datetime,
+drid bigint,
+ddatetime datetime,
+delflg bit
+)
+GO
+mstguest
+
+
+
+
+
+drop procedure usp_mstguest_add
+GO
+create PROCEDURE usp_mstguest_add
+(
+@p_json NVARCHAR(MAX),
+@p_retrid BIGINT out,
+@p_retval bit out,
+@p_reterr NVARCHAR(MAX) out
+)
+AS
+BEGIN
+BEGIN TRY
+declare @rid bigint
+declare @gcode nvarchar(50)
+declare @gname nvarchar(500)
+declare @gmobno nvarchar(500)
+declare @gwano nvarchar(500)
+declare @gemail nvarchar(500)
+declare @gadd1 nvarchar(500)
+declare @gadd2 nvarchar(500)
+declare @gadd3 nvarchar(500)
+declare @gcityrid bigint
+declare @gstaterid bigint
+declare @gcountryrid bigint
+declare @gremark1 nvarchar(max)
+declare @gremark2 nvarchar(max)
+declare @urid bigint
+
+set @p_retrid=0
+set @p_reterr=''
+set @p_retval=1
+
+SELECT * INTO #temptbl FROM OPENJSON(@p_json)
+WITH
+(rid bigint '$.rid',gcode nvarchar(50) '$.gcode',gname nvarchar(500) '$.gname',gmobno nvarchar(500) '$.gmobno',
+gwano nvarchar(500) '$.gwano',gemail nvarchar(500) '$.gemail',gadd1 nvarchar(500) '$.gadd1',gadd2 nvarchar(500) '$.gadd2',
+gadd3 nvarchar(500) '$.gadd3',gcityrid bigint '$.gcityrid',gstaterid bigint '$.gstaterid',gcountryrid bigint '$.gcountryrid',
+gremark1 nvarchar(max) '$.gremark1',gremark2 nvarchar(max) '$.gremark2',
+urid bigint '$.urid'
+)
+set @rid = (select rid from #temptbl)
+set @gcode = (select gcode from #temptbl)
+set @gname = (select gname from #temptbl)
+set @gmobno = (select gmobno from #temptbl)
+set @gwano = (select gwano from #temptbl)
+set @gemail = (select gemail from #temptbl)
+set @gadd1 = (select gadd1 from #temptbl)
+set @gadd2 = (select gadd2 from #temptbl)
+set @gadd3 = (select gadd3 from #temptbl)
+set @gcityrid = (select gcityrid from #temptbl)
+set @gstaterid = (select gstaterid from #temptbl)
+set @gcountryrid = (select gcountryrid from #temptbl)
+set @gremark1 = (select gremark1 from #temptbl)
+set @gremark2 = (select gremark2 from #temptbl)
+set @urid = (select urid from #temptbl)
+
+IF EXISTS (SELECT mstguest.gcode FROM mstguest WHERE mstguest.gcode = @gcode and isnull(mstguest.delflg,0)=0)
+BEGIN    
+    SET @p_retrid=0
+	set @p_reterr='PLEASE CHECK CODE ALREADY EXITS.'
+	set @p_retval=0 
+	RAISERROR('PLEASE CHECK CODE ALREADY EXITS.',16,1,@gcode);
+	
+END
+ELSE
+begin
+	insert into mstguest (gcode,gname,gmobno,gwano,gemail,gadd1,gadd2,gadd3,gcityrid,gstaterid,gcountryrid,
+					gremark1,gremark2,arid,adatetime,DELFLG)					
+	values (@gcode,@gname,@gmobno,@gwano,@gemail,@gadd1,@gadd2,@gadd3,@gcityrid,@gstaterid,@gcountryrid,
+			@gremark1,@gremark2,@urid,GETDATE(),0)
+	set @p_retrid = SCOPE_IDENTITY()
+end
+set @p_reterr=''
+DROP TABLE #temptbl
+END TRY
+BEGIN CATCH 
+	SET @p_retrid=0 
+	set @p_reterr=(SELECT ERROR_MESSAGE())
+	set @p_retval=0
+	DROP TABLE #temptbl
+	RETURN
+END CATCH
+END
+GO
+drop procedure usp_mstguest_update
+GO
+create PROCEDURE usp_mstguest_update
+(
+@p_json NVARCHAR(MAX),
+@p_retrid BIGINT out,
+@p_retval bit out,
+@p_reterr NVARCHAR(MAX) out
+)
+AS
+BEGIN
+BEGIN TRY
+declare @rid bigint
+declare @gcode nvarchar(50)
+declare @gname nvarchar(500)
+declare @gmobno nvarchar(500)
+declare @gwano nvarchar(500)
+declare @gemail nvarchar(500)
+declare @gadd1 nvarchar(500)
+declare @gadd2 nvarchar(500)
+declare @gadd3 nvarchar(500)
+declare @gcityrid bigint
+declare @gstaterid bigint
+declare @gcountryrid bigint
+declare @gremark1 nvarchar(max)
+declare @gremark2 nvarchar(max)
+declare @urid bigint
+
+set @p_retrid=0
+set @p_reterr=''
+set @p_retval=1
+
+SELECT * INTO #temptbl FROM OPENJSON(@p_json)
+WITH
+(rid bigint '$.rid',gcode nvarchar(50) '$.gcode',gname nvarchar(500) '$.gname',gmobno nvarchar(500) '$.gmobno',
+gwano nvarchar(500) '$.gwano',gemail nvarchar(500) '$.gemail',gadd1 nvarchar(500) '$.gadd1',gadd2 nvarchar(500) '$.gadd2',
+gadd3 nvarchar(500) '$.gadd3',gcityrid bigint '$.gcityrid',gstaterid bigint '$.gstaterid',gcountryrid bigint '$.gcountryrid',
+gremark1 nvarchar(max) '$.gremark1',gremark2 nvarchar(max) '$.gremark2',
+urid bigint '$.urid'
+)
+set @rid = (select rid from #temptbl)
+set @gcode = (select gcode from #temptbl)
+set @gname = (select gname from #temptbl)
+set @gmobno = (select gmobno from #temptbl)
+set @gwano = (select gwano from #temptbl)
+set @gemail = (select gemail from #temptbl)
+set @gadd1 = (select gadd1 from #temptbl)
+set @gadd2 = (select gadd2 from #temptbl)
+set @gadd3 = (select gadd3 from #temptbl)
+set @gcityrid = (select gcityrid from #temptbl)
+set @gstaterid = (select gstaterid from #temptbl)
+set @gcountryrid = (select gcountryrid from #temptbl)
+set @gremark1 = (select gremark1 from #temptbl)
+set @gremark2 = (select gremark2 from #temptbl)
+set @urid = (select urid from #temptbl)
+
+IF NOT EXISTS (SELECT mstguest.gcode FROM mstguest WHERE mstguest.gcode = @gcode and isnull(mstguest.delflg,0)=0)
+BEGIN    
+    SET @p_retrid=0
+	set @p_reterr='PLEASE CHECK RECORD NOT EXITS FOR UPDATE.'
+	set @p_retval=0 
+	RAISERROR('PLEASE CHECK RECORD NOT EXITS FOR UPDATE.',16,1,@gcode);	
+END
+ELSE IF EXISTS (SELECT mstguest.gcode FROM mstguest WHERE mstguest.gcode = @gcode and isnull(mstguest.delflg,0)=0 and isnull(mstguest.rid,0)!=@rid)
+BEGIN    
+    set @p_retrid=0
+	set @p_reterr='PLEASE CHECK, CODE ALREADY EXITS.'
+	set @p_retval=0   
+	RAISERROR('PLEASE CHECK CODE ALREADY EXITS.',16,1,@gcode);
+END
+ELSE
+begin
+	update mstguest 
+		set gcode=@gcode,gname=@gname,gmobno=@gmobno,gwano=@gwano,gemail=@gemail,gadd1=@gadd1,gadd2=@gadd2,gadd3=@gadd3,
+			gcityrid=@gcityrid,gstaterid=@gstaterid,gcountryrid=@gcountryrid,gremark1=@gremark1,gremark2=@gremark2,
+			erid=@urid,edatetime=GETDATE()
+			where rid=@rid		
+	set @p_retrid = @rid
+end
+set @p_reterr=''
+DROP TABLE #temptbl
+END TRY
+BEGIN CATCH 
+	SET @p_retrid=0 
+	set @p_reterr=(SELECT ERROR_MESSAGE())
+	set @p_retval=0
+	DROP TABLE #temptbl
+	RETURN
+END CATCH
+END
+GO
+drop procedure usp_mstguest_delete
+GO
+CREATE PROCEDURE usp_mstguest_delete
+(
+@p_json NVARCHAR(MAX),
+@p_retrid BIGINT out,
+@p_retval bit out,
+@p_reterr NVARCHAR(MAX) out
+)
+AS
+BEGIN
+BEGIN TRY
+declare @rid bigint
+declare @urid bigint
+
+set @p_retrid=0
+set @p_reterr=''
+set @p_retval=1
+
+SELECT * INTO #temptbl FROM OPENJSON(@p_json)
+WITH
+(rid bigint '$.rid',urid bigint '$.urid'
+)
+set @rid = (select rid from #temptbl)
+set @urid = (select urid from #temptbl)
+begin
+	update mstguest set mstguest.delflg=1,drid=@urid,ddatetime=GETDATE() where mstguest.rid=@rid	
+end
+set @p_reterr=''
+set @p_retrid=@rid
+DROP TABLE #temptbl
+END TRY
+BEGIN CATCH 
+	SET @p_retrid=0 
+	set @p_reterr=(SELECT ERROR_MESSAGE())
+	set @p_retval=0
+	DROP TABLE #temptbl
+	RETURN
+END CATCH
+END
+GO
+drop procedure usp_mstguest_getalldetails
+GO
+create procedure usp_mstguest_getalldetails as
+begin
+select mstguest.rid,mstguest.gcode,mstguest.gname,mstguest.gmobno,mstguest.gwano,mstguest.gemail,mstguest.gadd1,mstguest.gadd2,mstguest.gadd3,mstguest.gcityrid,mstguest.gstaterid,mstguest.gcountryrid,
+mstguest.gremark1,mstguest.gremark2,
+mstguest.arid,mstguest.adatetime,mstguest.erid,mstguest.edatetime,mstguest.drid,mstguest.ddatetime,mstguest.delflg
+from mstguest
+order by mstguest.gname,mstguest.rid
+end
+GO
+drop procedure usp_mstguest_getlist
+GO
+create procedure usp_mstguest_getlist as
+begin
+select mstguest.rid,mstguest.gcode,mstguest.gname,mstguest.gmobno,mstguest.gemail,
+mstcountry.countryname,mststate.statename,mstcity.cityname
+from mstguest 
+left join mstcountry on (mstcountry.rid=mstguest.gcountryrid)
+left join mststate on (mststate.rid=mstguest.gstaterid)
+left join mstcity on (mstcity.rid=mstguest.gcityrid)
+where isnull(mstguest.delflg,0)=0
+order by mstguest.gname,mstguest.rid
+end
+GO
+drop procedure usp_mstguest_getbyid(@p_rid bigint)
+GO
+create procedure usp_mstguest_getbyid(@p_rid bigint) as
+begin
+select mstguest.rid,mstguest.gcode,mstguest.gname,mstguest.gmobno,mstguest.gwano,mstguest.gemail,mstguest.gadd1,mstguest.gadd2,mstguest.gadd3,mstguest.gcityrid,mstguest.gstaterid,mstguest.gcountryrid,
+mstguest.gremark1,mstguest.gremark2,
+mstguest.arid,mstguest.adatetime,mstguest.erid,mstguest.edatetime,mstguest.drid,mstguest.ddatetime,mstguest.delflg
+from mstguest
+where mstguest.rid=@p_rid and isnull(mstguest.delflg,0)=0
+end
+GO
+
+
+

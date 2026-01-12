@@ -18,6 +18,7 @@ namespace eventbookingmgmt.repository
         public DbSet<Dbmststate> mststate { get; set; }
         public DbSet<Dbmstcountry> mstcountry { get; set; }
         public DbSet<Dbmstlocation> mstlocation { get; set; }
+        public DbSet<Dbmstguest> mstguest { get; set; }
 
         #endregion
 
@@ -27,6 +28,7 @@ namespace eventbookingmgmt.repository
         public DbSet<Comststate> comststate { get; set; }
         public DbSet<Comstcountry> comstcountry { get; set; }
         public DbSet<Comstlocation> comstlocation { get; set; }
+        public DbSet<Comstguest> comstguest { get; set; }
 
         #endregion
     }
