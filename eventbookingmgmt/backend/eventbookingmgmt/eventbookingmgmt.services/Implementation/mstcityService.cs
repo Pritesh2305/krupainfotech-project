@@ -84,9 +84,8 @@ namespace eventbookingmgmt.services.Implementation
             catch (Exception ex)
             {
                 res.ISuccess = false;
-                res.Errors.Add($"Error Occures in Update Services : {ex.Message.ToString()}");
+                res.Errors?.Add($"Error Occures in Update Services : {ex.Message.ToString()}");
                 return res;
-
             }
 
         }
@@ -119,7 +118,7 @@ namespace eventbookingmgmt.services.Implementation
             catch (Exception ex)
             {
                 res.ISuccess = false;
-                res.Errors.Add($"Error Occures in Delete Services : {ex.Message.ToString()}");
+                res.Errors?.Add($"Error Occures in Delete Services : {ex.Message.ToString()}");
                 return res;
 
             }
@@ -127,7 +126,7 @@ namespace eventbookingmgmt.services.Implementation
         }
         public ResultDto<IEnumerable<Dbmstcity?>> GetlistDetails()
         {
-            var res = new ResultDto<IEnumerable<Dbmstcity>>
+            var res = new ResultDto<IEnumerable<Dbmstcity?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -138,8 +137,8 @@ namespace eventbookingmgmt.services.Implementation
                 var response = _imstcityRepository.GetlistDetails();
                 if (response.ISuccess)
                 {
-                    List<Dbmstcity> list = new List<Dbmstcity>();
-                    Dbmstcity obj = new Dbmstcity();
+                    List<Dbmstcity?> list = new List<Dbmstcity?>();
+                    Dbmstcity? obj = new Dbmstcity();
                     res.ISuccess = true;
 
                     foreach (var item in response.Data)
@@ -148,7 +147,7 @@ namespace eventbookingmgmt.services.Implementation
                         {
                             if (item != null)
                             {
-                                Dbmstcity obj1 = new Dbmstcity();
+                                Dbmstcity? obj1 = new Dbmstcity();
                                 obj1.rid = item.rid;
                                 obj1.citycode = item.citycode + "".Trim();
                                 obj1.cityname = item.cityname + "".Trim();
@@ -180,7 +179,7 @@ namespace eventbookingmgmt.services.Implementation
 
         public ResultDto<IEnumerable<Dbmstcity?>> GetAllDetails()
         {
-            var res = new ResultDto<IEnumerable<Dbmstcity>>
+            var res = new ResultDto<IEnumerable<Dbmstcity?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -233,7 +232,7 @@ namespace eventbookingmgmt.services.Implementation
 
         public ResultDto<IEnumerable<Comstcity?>> Getlist()
         {
-            var res = new ResultDto<IEnumerable<Comstcity>>
+            var res = new ResultDto<IEnumerable<Comstcity?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -279,7 +278,7 @@ namespace eventbookingmgmt.services.Implementation
 
         public ResultDto<IEnumerable<Comstcity?>> GetAll()
         {
-            var res = new ResultDto<IEnumerable<Comstcity>>
+            var res = new ResultDto<IEnumerable<Comstcity?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -325,7 +324,7 @@ namespace eventbookingmgmt.services.Implementation
 
         public ResultDto<Comstcity?> GetById(Int64 Id)
         {
-            var res = new ResultDto<Comstcity>
+            var res = new ResultDto<Comstcity?>
             {
                 ISuccess = false,
                 Data = null,

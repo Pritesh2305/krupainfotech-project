@@ -13,7 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 namespace eventbookingmgmt.api.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class mstcityController : ControllerBase

@@ -4,11 +4,13 @@ using eventbookingmgmt.entities.Common;
 using eventbookingmgmt.entities.RequestDto;
 using eventbookingmgmt.services.Implementation;
 using eventbookingmgmt.services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace eventbookingmgmt.api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class mstlocationController : ControllerBase

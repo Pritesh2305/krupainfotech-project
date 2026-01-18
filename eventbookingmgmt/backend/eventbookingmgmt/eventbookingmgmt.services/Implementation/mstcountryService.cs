@@ -83,7 +83,7 @@ namespace eventbookingmgmt.services.Implementation
             catch (Exception ex)
             {
                 res.ISuccess = false;
-                res.Errors.Add($"Error Occures in Update Services : {ex.Message.ToString()}");
+                res.Errors?.Add($"Error Occures in Update Services : {ex.Message.ToString()}");
                 return res;
 
             }
@@ -118,7 +118,7 @@ namespace eventbookingmgmt.services.Implementation
             catch (Exception ex)
             {
                 res.ISuccess = false;
-                res.Errors.Add($"Error Occures in Delete Services : {ex.Message.ToString()}");
+                res.Errors?.Add($"Error Occures in Delete Services : {ex.Message.ToString()}");
                 return res;
 
             }
@@ -126,7 +126,7 @@ namespace eventbookingmgmt.services.Implementation
         }
         public ResultDto<IEnumerable<DbmstcountryResponse?>> GetAllDetails()
         {
-            var res = new ResultDto<IEnumerable<DbmstcountryResponse>>
+            var res = new ResultDto<IEnumerable<DbmstcountryResponse?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -176,7 +176,7 @@ namespace eventbookingmgmt.services.Implementation
         }
         public ResultDto<IEnumerable<mstcountryResponse?>> GetList()
         {
-            var res = new ResultDto<IEnumerable<mstcountryResponse>>
+            var res = new ResultDto<IEnumerable<mstcountryResponse?>>
             {
                 ISuccess = false,
                 Data = null,

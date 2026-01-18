@@ -47,7 +47,7 @@ namespace eventbookingmgmt.services.Implementation
             catch (Exception ex)
             {
                 res.ISuccess = false;
-                res.Errors.Add($"Error Occures in Add Services : {ex.Message.ToString()}");
+                res.Errors?.Add($"Error Occures in Add Services : {ex.Message.ToString()}");
                 return res;
 
             }
@@ -82,7 +82,7 @@ namespace eventbookingmgmt.services.Implementation
             catch (Exception ex)
             {
                 res.ISuccess = false;
-                res.Errors.Add($"Error Occures in Update Services : {ex.Message.ToString()}");
+                res.Errors?.Add($"Error Occures in Update Services : {ex.Message.ToString()}");
                 return res;
 
             }
@@ -117,7 +117,7 @@ namespace eventbookingmgmt.services.Implementation
             catch (Exception ex)
             {
                 res.ISuccess = false;
-                res.Errors.Add($"Error Occures in Delete Services : {ex.Message.ToString()}");
+                res.Errors?.Add($"Error Occures in Delete Services : {ex.Message.ToString()}");
                 return res;
 
             }
@@ -125,7 +125,7 @@ namespace eventbookingmgmt.services.Implementation
         }
         public ResultDto<IEnumerable<DbmstlocationResponse?>> GetAllDetails()
         {
-            var res = new ResultDto<IEnumerable<DbmstlocationResponse>>
+            var res = new ResultDto<IEnumerable<DbmstlocationResponse?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -146,10 +146,10 @@ namespace eventbookingmgmt.services.Implementation
                             {
                                 DbmstlocationResponse obj1 = new DbmstlocationResponse();
                                 obj1.rid = item.rid;
-                                obj1.locationcode = item.loccode + "".Trim();
-                                obj1.locationname = item.locname + "".Trim();
-                                obj1.locationremark1 = item.locremark1 + "".Trim();
-                                obj1.locationremark2 = item.locremark2 + "".Trim();
+                                obj1.loccode = item.loccode + "".Trim();
+                                obj1.locname = item.locname + "".Trim();
+                                obj1.locremark1 = item.locremark1 + "".Trim();
+                                obj1.locremark2 = item.locremark2 + "".Trim();
                                 obj1.arid = item.arid;
                                 obj1.adatetime = item.adatetime;
                                 obj1.erid = item.erid;
@@ -175,7 +175,7 @@ namespace eventbookingmgmt.services.Implementation
         }
         public ResultDto<IEnumerable<mstlocationResponse?>> GetList()
         {
-            var res = new ResultDto<IEnumerable<mstlocationResponse>>
+            var res = new ResultDto<IEnumerable<mstlocationResponse?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -196,10 +196,10 @@ namespace eventbookingmgmt.services.Implementation
                             {
                                 mstlocationResponse obj1 = new mstlocationResponse();
                                 obj1.rid = item.rid;
-                                obj1.locationcode = item.loccode + "".Trim();
-                                obj1.locationname = item.locname + "".Trim();
-                                obj1.locationremark1 = item.locremark1 + "".Trim();
-                                obj1.locationremark2 = item.locremark2 + "".Trim();
+                                obj1.loccode = item.loccode + "".Trim();
+                                obj1.locname = item.locname + "".Trim();
+                                obj1.locremark1 = item.locremark1 + "".Trim();
+                                obj1.locremark2 = item.locremark2 + "".Trim();
                                 list.Add(obj1);
                             }
                         }
@@ -234,10 +234,10 @@ namespace eventbookingmgmt.services.Implementation
                     if (response.Data != null)
                     {
                         obj.rid = response.Data.rid;
-                        obj.locationcode = response.Data.loccode + "".Trim();
-                        obj.locationname = response.Data.locname + "".Trim();
-                        obj.locationremark1 = response.Data.locremark1 + "".Trim();
-                        obj.locationremark2 = response.Data.locremark2 + "".Trim();
+                        obj.loccode = response.Data.loccode + "".Trim();
+                        obj.locname = response.Data.locname + "".Trim();
+                        obj.locremark1 = response.Data.locremark1 + "".Trim();
+                        obj.locremark2 = response.Data.locremark2 + "".Trim();
                     }
                     res.Data = obj;
                 }

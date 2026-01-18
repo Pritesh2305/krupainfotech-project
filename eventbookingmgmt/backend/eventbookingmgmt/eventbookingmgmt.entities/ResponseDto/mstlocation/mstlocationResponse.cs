@@ -9,9 +9,9 @@ namespace eventbookingmgmt.entities.ResponseDto.mstlocation
     public class mstlocationResponse
     {
         public Int64 rid { get; set; }
-        public string? locationcode { get; set; } = "";
-        public string? locationname { get; set; } = "";
-        public string? locationremark1 { get; set; } = "";
-        public string? locationremark2 { get; set; } = "";
+        public string? loccode { get; set; } = "";
+        public string? locname { get; set; } = "";
+        public string? locremark1 { get; set; } = "";
+        public string? locremark2 { get; set; } = "";
     }
 }

@@ -106,9 +106,9 @@ namespace eventbookingmgmt.services.Implementation
             }
 
         }
-        public ResultDto<IEnumerable<mstusersResponse>> GetAll()
+        public ResultDto<IEnumerable<mstusersResponse?>> GetAll()
         {
-            var res = new ResultDto<IEnumerable<mstusersResponse>>
+            var res = new ResultDto<IEnumerable<mstusersResponse?>>
             {
                 ISuccess = false,
                 Data = null,
@@ -127,7 +127,7 @@ namespace eventbookingmgmt.services.Implementation
                     {
                         if (item != null)
                         {
-                            mstusersResponse obj1 = new mstusersResponse();
+                            mstusersResponse? obj1 = new mstusersResponse();
                             obj1.rid = item.rid;
                             obj1.usercode = item.usercode + "";
                             obj1.firstname = item.firstname + "";

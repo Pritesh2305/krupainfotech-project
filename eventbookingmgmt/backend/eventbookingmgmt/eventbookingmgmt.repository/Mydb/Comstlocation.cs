@@ -11,9 +11,9 @@ namespace eventbookingmgmt.repository.Mydb
     {
         [Key]
         public Int64 rid { get; set; }
-        public string loccode { get; set; } = "";
-        public string locname { get; set; } = "";
-        public string locremark1 { get; set; } = "";
-        public string locremark2 { get; set; } = "";
+        public string? loccode { get; set; } = "";
+        public string? locname { get; set; } = "";
+        public string? locremark1 { get; set; } = "";
+        public string? locremark2 { get; set; } = "";
     }
 }
